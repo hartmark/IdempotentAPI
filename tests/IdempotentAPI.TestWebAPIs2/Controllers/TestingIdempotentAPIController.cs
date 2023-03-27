@@ -13,7 +13,7 @@ namespace IdempotentAPI.TestWebAPIs2.Controllers
     [Consumes("application/json")]
     [Produces("application/json")]
 
-    [Idempotent(CacheOnlySuccessResponses = true, DistributedLockTimeoutMilli = 2000)]
+    [Idempotent(CacheOnlySuccessResponses = true, DistributedLockTimeoutMilli = 2000, HeaderKeyName = "IdempotencyKey")]
     public class TestingIdempotentAPIController : ControllerBase
     {
         private readonly ILogger<TestingIdempotentAPIController> _logger;

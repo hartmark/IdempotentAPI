@@ -32,6 +32,8 @@ namespace IdempotentAPI.Filters
         /// </summary>
         public double DistributedLockTimeoutMilli { get; set; } = -1;
 
+        public string? HeaderKeyName { get; set; }
+
         public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
         {
             var distributedCache = serviceProvider.GetRequiredService<IIdempotencyAccessCache>();
@@ -50,7 +52,7 @@ namespace IdempotentAPI.Filters
                 CacheOnlySuccessResponses = CacheOnlySuccessResponses || settings.CacheOnlySuccessResponses,
                 DistributedCacheKeysPrefix = settings.DistributedCacheKeysPrefix,
                 DistributedLockTimeout = distributedLockTimeout,
-                HeaderKeyName = settings.HeaderKeyName,
+                HeaderKeyName = HeaderKeyName ?? settings.HeaderKeyName,
                 ExpiryTime = ExpiryTime.GetValueOrDefault(settings.ExpiryTime),
                 Enabled = Enabled || settings.Enabled
             };

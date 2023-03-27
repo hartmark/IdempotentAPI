@@ -2,7 +2,6 @@ using System.Net;
 using IdempotentAPI.Filters;
 using IdempotentAPI.TestWebAPIs1.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 
 namespace IdempotentAPI.TestWebAPIs1.Controllers
 {
@@ -13,7 +12,7 @@ namespace IdempotentAPI.TestWebAPIs1.Controllers
     [Consumes("application/json")]
     [Produces("application/json")]
 
-    [Idempotent(CacheOnlySuccessResponses = true, DistributedLockTimeoutMilli = 2000)]
+    [Idempotent(CacheOnlySuccessResponses = true, DistributedLockTimeoutMilli = 2000, HeaderKeyName = "IdempotencyKey")]
     public class TestingIdempotentAPIController : ControllerBase
     {
         private readonly ILogger<TestingIdempotentAPIController> _logger;

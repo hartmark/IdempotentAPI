@@ -19,7 +19,8 @@ builder.Services.AddTransient(serviceProvider =>
     var idempotentAttribute = new IdempotentAttribute
     {
         CacheOnlySuccessResponses = true,
-        DistributedLockTimeoutMilli = 2000
+        DistributedLockTimeoutMilli = 2000,
+        HeaderKeyName = "IdempotencyKey"
     };
     return (IdempotencyAttributeFilter)idempotentAttribute.CreateInstance(serviceProvider);
 });
